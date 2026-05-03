@@ -15,7 +15,6 @@ pub struct NewTask{
 
 impl NewTask{
     pub fn valid(self: &Self) -> bool{
-        if self.title.is_empty() { return false;}
-        true
+        !self.title.trim().is_empty()
     }
 }
