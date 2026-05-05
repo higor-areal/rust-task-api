@@ -41,7 +41,7 @@ pub async fn new_task(State(state): State<Arc<Mutex<AppState>>> , Json(item): Js
     Ok(Json(ResponseNewTask{status_code: 200, task: temp}))
 }
 
-pub async fn get_task(State(state): State<Arc<Mutex<AppState>>>) -> Json<Vec<Task>>{
+pub async fn get_tasks(State(state): State<Arc<Mutex<AppState>>>) -> Json<Vec<Task>>{
 
     let data = state.lock().unwrap();
     Json(data.tasks.clone())
