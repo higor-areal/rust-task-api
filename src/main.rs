@@ -3,7 +3,7 @@ mod models;
 mod responses;
 mod state;
 
-use handlers::task_hendler::{home, echo, new_task};
+use handlers::task_hendler::{home, echo, new_task, get_task};
 use axum::{
     Router,
     routing::{get, post}
@@ -25,10 +25,13 @@ async fn main() {
     .route("/", get(home))
     .route("/echo", post(echo))
     .route("/tasks", post(new_task))
+    .route("/tasks", get(get_task))
     .with_state(shared);
 
+    println!("Start server");
     let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
-    println!("Iniciando");
+
+    
 
     axum::serve(listener, app).await.unwrap();
 }   
